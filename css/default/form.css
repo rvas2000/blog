@@ -1,0 +1,36 @@
+div.form-content {
+	width: 420px;
+	border: 1px solid #c0c0c0;
+	margin-right: 10px;
+}
+
+div.auto-generate-panel {
+	width: 200px;
+	border: 1px solid #c0c0c0;
+}
+
+div.form-content label {
+	display: block;
+	float: left;
+	width: 400px;
+	margin-bottom: 5px;
+}
+
+div.form-content input, div.form-content select {
+	width: 250px;
+	height: 30px;
+	float: right;
+}
+
+div.form-content input[type=submit] {
+	width: 150px;
+	height: 30px;
+	float: left;
+}
+
+div.info {
+	height: 50px;
+}
+
+
+

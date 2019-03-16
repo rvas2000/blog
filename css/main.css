@@ -1,0 +1,29 @@
+div {
+    float: left;
+    padding: 10px;
+    width: calc( 100% - 20px);
+}
+
+div.menu {
+	background-color: #c1c1c1;
+	/*font-size: 10px;*/
+	font-weight: bolder;
+	font-family: verdana, arial, sans-serif;
+}
+
+div.menu ul {
+    float: left;
+    margin: 0;
+}
+
+div.menu ul li {
+    float: left;
+    display: block;
+    margin-left: 10px;
+}
+
+div.content {
+    padding: 10px;
+}
+
+

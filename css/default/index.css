@@ -1,0 +1,18 @@
+div.table-content {
+	width: 100%;
+	height: 500px;
+	padding: 0;
+	overflow: scroll;
+}
+
+div.table-content table {
+	width: 100%;
+	border-top: 1px solid #c0c0c0;
+	border-left: 1px solid #c0c0c0;
+}
+
+div.table-content table td, div.table-content table th {
+	border-right: 1px solid #c0c0c0;
+	border-bottom: 1px solid #c0c0c0;
+	height: 30px;
+}
