@@ -31,3 +31,33 @@ div.content {
 }
 
 
+.gray-border {
+    border: 1px solid #c1c1c1;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+div.auth-form {
+    padding: 0;
+    float: right;
+    margin-left: 10px;
+    width: 270px;
+}
+
+div.auth-form form {
+    display: block;
+    margin: 0;
+    float: right;
+}
+
+div.auth-form   {
+    font-size: 14px;
+    font-weight: normal;
+    text-align: right;
+}
+
+div.auth-form form input[type=password] {
+    width: 120px;
+    margin-left: 10px;
+}

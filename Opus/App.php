@@ -27,6 +27,10 @@ class App
 
     private $log = null;
 
+    private $auth = null;
+
+    private $session = null;
+
     /**
      *  Возвращает PDO 
      */
@@ -145,6 +149,23 @@ class App
             $this->view = new View();
         }
         return $this->view;
+    }
+
+    public function getAuth()
+    {
+        if ($this->auth === null) {
+            $this->auth = new Auth();
+        }
+        return $this->auth;
+    }
+
+
+    public function getSession()
+    {
+        if ($this->session === null) {
+            $this->session = new Session();
+        }
+        return $this->session;
     }
 
     /**

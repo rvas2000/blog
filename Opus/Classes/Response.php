@@ -54,6 +54,16 @@ class Response
     }
 
     /**
+     * Редирект
+     * @param $url
+     */
+    public function redirect($url)
+    {
+        $this->setHeader('Location', $url);
+        $this->setContent('');
+    }
+
+    /**
      *  Выдает HTTP-ответ клиенту
      */
     public function flush()
