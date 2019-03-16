@@ -10,7 +10,7 @@ div {
 
 div.menu {
 	background-color: #c1c1c1;
-	/*font-size: 10px;*/
+	font-size: 12px;
 	font-weight: bolder;
 	font-family: verdana, arial, sans-serif;
 }
@@ -52,7 +52,7 @@ div.auth-form form {
 }
 
 div.auth-form   {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     text-align: right;
 }

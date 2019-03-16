@@ -1,0 +1,26 @@
+div.admin-gallery, div.admin-tags {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: calc(50% - 35px);
+    min-width: 335px;
+}
+
+div.admin-gallery h3, div.admin-tags h3 {
+    margin: 0 10px 10px 10px;
+}
+
+div.gallery-content, div.tags-content {
+    margin-top: 10px;
+    overflow:scroll;
+    height: 600px;
+}
+
+div.tag-filter form {
+    display: block;
+    float: inherit;
+    margin: 0;
+}
+
+div.tag-filter form input[type=text] {
+    margin-left: 10px;
+}
