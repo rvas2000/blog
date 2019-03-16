@@ -1,3 +1,7 @@
+* {
+    font-family: verdana, arial, sans-serif;
+}
+
 div {
     float: left;
     padding: 10px;

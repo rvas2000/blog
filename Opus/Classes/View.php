@@ -96,6 +96,16 @@ class View
         extract($values);
         if ($layoutPath !== false) { include $layoutPath;}
         $this->template = null;
-        return ob_get_clean();
+        return trim(ob_get_clean());
+    }
+
+    public function renderPartial($template, $values = [])
+    {
+        ob_start();
+        $templatePath = realpath($this->getTemplatePath() . '/' .$template . '.php');
+        extract($values);
+        include $templatePath;
+
+        return trim(ob_get_clean());
     }
 }

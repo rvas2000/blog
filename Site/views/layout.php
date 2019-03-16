@@ -7,12 +7,12 @@
     </head>
     <body>
         <div class="header">
-            <h1>Тестовое задание</h1>
+            <h1>Тестовое задание (блог) </h1>
         </div>
 
         <div class="menu">
             <ul>
-                <li><a href="/">Отображение данных</a></li>
+                <li><a href="/">Новости</a></li>
                 <li><a href="?action=form">Добавление данных</a></li>
             </ul>
         </div>

@@ -4,14 +4,22 @@ use Opus\DbServiceAbstract;
 
 class DbService extends DbServiceAbstract
 {
-    public function getNews($dateFrom = null, $dateTo = null, $header = null)
+    /**
+     * Получение списка новостей
+     * @param null $dateFrom - дата с
+     * @param null $dateTo - дата по
+     * @param null $header - фрагмент заголовка
+     * @param null $fromId - Начиная с какого ID выбирать записи
+     * @return array
+     */
+    public function getNews($dateFrom = null, $dateTo = null, $header = null, $fromId = null)
     {
         $conditions = [];
         $parameters = [];
         
         $i = 1;
-        if ($dateFrom !== null) {
-            if ($dateTo !== null) {
+        if (! empty($dateFrom)) {
+            if ( ! empty($dateTo) ) {
                 $conditions[] = "created_at BETWEEN ?::timestamp AND ?::timestamp";
                 $parameters[$i++] = [$dateFrom, \PDO::PARAM_STR];
                 $parameters[$i++] = [$dateTo, \PDO::PARAM_STR];
@@ -21,9 +29,14 @@ class DbService extends DbServiceAbstract
             };
         }
 
-        if ($header !== null) {
+        if ( ! empty($header) ) {
             $conditions[] = "header LIKE CONCAT('%', ?::varchar(255), '%')";
             $parameters[$i++] = [$header, \PDO::PARAM_STR];
+        }
+
+        if ($fromId !== null && is_numeric($fromId)) {
+            $conditions[] = "id > ?";
+            $parameters[$i++] = [(int) $fromId, \PDO::PARAM_INT];
         }
 
         $where = '';
@@ -41,13 +54,18 @@ class DbService extends DbServiceAbstract
     }
 
 
-    public function getGallery($tag)
+    /**
+     * Получение списка картинок
+     * @param $tag - фрагмент тега
+     * @return array
+     */
+    public function getGallery($tag = null)
     {
         $conditions = [];
         $parameters = [];
         
         $i = 1;
-        if ($tag !== null) {
+        if (! empty($tag) ) {
             $conditions[] = "c.name LIKE CONCAT('%', ?::varchar(255), '%')";
             $parameters[$i++] = [$tag, \PDO::PARAM_STR];
         }
@@ -87,14 +105,18 @@ class DbService extends DbServiceAbstract
     }
 
 
-
+    /**
+     * Получение списка тегов
+     * @param $tag - фрагмент тега для поиска
+     * @return array
+     */
     public function getTags($tag)
     {
         $conditions = [];
         $parameters = [];
 
         $i = 1;
-        if ($tag !== null) {
+        if ( ! empty($tag) ) {
             $conditions[] = "name LIKE CONCAT('%', ?::varchar(255), '%')";
             $parameters[$i++] = [$tag, \PDO::PARAM_STR];
         }

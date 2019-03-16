@@ -20,7 +20,11 @@ class RestController extends Controller
     }
 
 
-    public function actionGetNews()
+    /**
+     * Получение списка новостей
+     * @return array
+     */
+    public function actionIndex()
     {
         try {
             $dateFrom = $this->getRequest()->getParameter('date_from');
@@ -37,6 +41,10 @@ class RestController extends Controller
     }
 
 
+    /**
+     * Получение списка картинок с тегами
+     * @return array
+     */
     public function actionGetGallery()
     {
         try {
@@ -52,51 +60,20 @@ class RestController extends Controller
     }
 
     /**
-     *   Получение списка записей из таблицы transport, начиная с id, большего from_id
+     * Получение списка тегов
+     * @return array
      */
-    public function actionIndex()
+    public function actionGetTags()
     {
         try {
-            $fromId = $this->getRequest()->getParameter('from_id', 0);
-            $rows = $this->getService('db')->getTransport($fromId);   
-            return ['result' => 1, 'data' => ['rows' => $rows]];
-        } catch (Exception $e) {
-            return ['result' => 0, 'error' => $e->getMessage()];
-        }
-    }
+            $tag = $this->getRequest()->getParameter('tag');
 
-    /**
-     *   Добавление в таблицу transort случайной записи
-     */
-    public function actionGenerate()
-    {
-        try {
-            // Удаляем автоматически добавленные записи старше 2 минут
-            $this->getService('db')->deleteOldTransport(120);
-            // Генерируем случайную запись и добавляем ее
-            $data = $this->getService('generate-transport')->getRandomRecord();
-            $id = $this->getService('db')->insertTransport($data);   
-            return ['result' => 1, 'data' => ['id' => $id]];
+            $rows = $this->getService('db')->getTags($tag);
+            return ['result' => 1, 'data' => $rows];
         } catch (Exception $e) {
+            // return $e->getMessage();
             return ['result' => 0, 'error' => $e->getMessage()];
         }
 
     }
-
-    /**
-     *   Обработка ручного добавления записи в таблицу transport
-     */
-    public function actionSave()
-    {
-        try {
-            // Получаем данные из формы
-            $data = $this->getRequest()->getParameter('transport');
-            $data['handle'] = true; // принудительно задаем тип ввода ручной
-            $id = $this->getService('db')->insertTransport($data); // добавляем запись
-            return ['result' => 1, 'data' => ['id' => $id]];
-        } catch (Exception $e) {
-            return ['result' => 0, 'error' => $e->getMessage()];
-        }
-    }
-
 }

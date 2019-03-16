@@ -31,7 +31,11 @@ abstract class DbServiceAbstract extends ServiceAbstract
     {
         $stmt = $this->getPdo()->prepare($sql);
         foreach ($parameters as $key => &$value) {
-            $stmt->bindParam($key, $value[0], $value[1]);
+            if (is_array($value) && count($value) == 2) {
+                $stmt->bindParam($key, $value[0], $value[1]);
+            } else {
+                $stmt->bindParam($key, $value);
+            }
         }
         return $stmt;
     }

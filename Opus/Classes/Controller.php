@@ -63,4 +63,13 @@ class Controller
         return $this->getApp()->getView()->render($values, $templateName);
     }
 
+
+    /**
+     *  Рендерит результат в соответствии с шаблоном без учета макета
+     */
+    public function renderPartial($templateName, $values = [])
+    {
+        return $this->getApp()->getView()->renderPartial($templateName, $values);
+    }
+
 }

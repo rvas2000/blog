@@ -17,19 +17,19 @@ class DefaultController extends Controller
     {
         $this->getView()->registerCss('/css/default/index.css');
         $this->getView()->registerJs('/js/default/index.js');
-        $items = $this->getService('db')->getTransport();
-        return $this->render(['items' => $items]);
+        return $this->render();
     }
 
-    /**
-     *
-     */
-    public function actionForm()
+
+    public function actionGetNewsAjax()
     {
-        $this->getView()->registerCss('/css/default/form.css');
-        $this->getView()->registerJs('/js/default/form.js');
-        $names = $this->getService("generate-transport")->transport;
-        $directions = $this->getService("generate-transport")->streets;
-        return $this->render(['names' => $names, 'directions' => $directions]);
+        $dateFrom = $this->getRequest()->getParameter('date_from');
+        $dateTo = $this->getRequest()->getParameter('date_to');
+        $header = (string) $this->getRequest()->getParameter('header');
+        $fromId = (string) $this->getRequest()->getParameter('from_id');
+
+        $news = $this->getService('db')->getNews($dateFrom, $dateTo, $header, $fromId);
+        return $this->renderPartial('_all-news', ['news' => $news]);
     }
+
 }
