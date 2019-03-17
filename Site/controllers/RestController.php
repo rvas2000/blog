@@ -145,6 +145,17 @@ class RestController extends Controller
     }
 
 
+    public function actionUpload()
+    {
+        try {
+            $fileName = $this->getApp()->getUploader()->upload('img', '/images/gallery');
+            return ['result' => 1, 'data' => $fileName];
+        } catch (Exception $e) {
+
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+    }
+
     public function actionTest()
     {
         $this->getApp()->getResponse()->setType('html');

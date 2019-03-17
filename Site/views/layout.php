@@ -23,6 +23,7 @@
                 <ul>
                     <li><a href="/">Главная</a></li>
                     <li><a href="?controller=admin">Админка</a></li>
+                    <li><a href="?controller=test">Тест</a></li>
                 </ul>
                 <div class="auth-form">
                     <a href="/?controller=auth&action=logout">Выйти</a>

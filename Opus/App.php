@@ -31,6 +31,8 @@ class App
 
     private $session = null;
 
+    private $uploader = null;
+
     /**
      *  Возвращает PDO 
      */
@@ -166,6 +168,14 @@ class App
             $this->session = new Session();
         }
         return $this->session;
+    }
+
+    public function getUploader()
+    {
+        if ($this->uploader === null) {
+            $this->uploader = new Uploader();
+        }
+        return $this->uploader;
     }
 
     /**
