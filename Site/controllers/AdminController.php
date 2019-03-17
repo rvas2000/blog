@@ -31,6 +31,10 @@ class AdminController extends Controller
 
     }
 
+    public function actionGetEmptyTagAjax()
+    {
+        return $this->renderPartial('_tag', ['item' => ['id' => '', 'name' => '']]);
+    }
 
     public function actionGetGalleryAjax()
     {

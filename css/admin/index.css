@@ -24,3 +24,37 @@ div.tag-filter form {
 div.tag-filter form input[type=text] {
     margin-left: 10px;
 }
+
+div.tag-content {
+    height: 22px;
+    margin-bottom: 5px;
+    /*padding:5px;*/
+}
+
+div.tag-content input[type=text] {
+    width: calc(100% - 70px);
+    border: 0;
+    border-bottom:1px dashed #c1c1c1;
+
+}
+
+
+div.gallery-content-item {
+    margin-bottom: 5px;
+}
+
+div.gallery-content-item input[type=text]{
+    width: calc(100% - 10px);
+    border: 0;
+    border-bottom:1px dashed #c1c1c1;
+    margin-top: 5px;
+}
+
+div.gallery-content-item-image {
+    width: 80%;
+    border: 1px solid #c1c1c1;
+}
+
+div.gallery-content-item-image img {
+    width: 100%;
+}

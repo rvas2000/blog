@@ -17,11 +17,11 @@ $(function () {
             "date_from": dateFrom,
             "date_to": dateTo,
             "header": header,
-            "action": "get-news-ajax"
         };
 
         $.ajax({
-            url: '/',
+            url: '/?action=get-news-ajax',
+            methos: 'post',
             data: parameters,
             success: function (data) {
                 $('div.all-news').empty().html(data);

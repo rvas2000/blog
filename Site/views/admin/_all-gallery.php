@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: basil
- * Date: 17.03.19
- * Time: 1:08
- */
+<?php foreach ($items as $item):?>
+    <?php echo $this->renderPartial('_gallery', ['item' => $item])?>
+<?php endforeach; ?>

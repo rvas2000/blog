@@ -76,4 +76,44 @@ class RestController extends Controller
         }
 
     }
+
+
+    public function actionSaveTag()
+    {
+        try {
+            $id = $this->getRequest()->getParameter('id');
+            $name = $this->getRequest()->getParameter('name');
+            $data = ['name' => $name];
+            if (! empty($id)) {$data['id'] = $id;}
+            $id = $this->getService('db')->saveTag($data);
+            return ['result' => 1, 'data' => $id];
+        } catch (Exception $e) {
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+
+
+
+    }
+
+
+    public function actionDeleteTag()
+    {
+        try {
+            $id = $this->getRequest()->getParameter('id');
+            if ( ! empty($id)) {
+                $this->getService('db')->deleteTag($id);
+            }
+            return ['result' => 1, 'data' => $id];
+        } catch (Exception $e) {
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+
+    }
+
+    public function actionTest()
+    {
+        $this->getApp()->getResponse()->setType('html');
+        $this->getService('db')->update('tags', ['name' => 'Киви'], ['id' => 3]);
+        return 1;
+    }
 }

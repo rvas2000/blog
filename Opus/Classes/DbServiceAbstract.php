@@ -49,14 +49,14 @@ abstract class DbServiceAbstract extends ServiceAbstract
         $holders = [];
         $parameters = [];
 
+        $i = 1;
         foreach ($data as $field => $value) {
-            $fields[] = "`{$field}`";
+            $fields[] = $field;
             $holders[] = '?';
-            $parameters[] = $value;
+            $parameters[$i++] = $value;
         }
 
-        $sql = "INSERT INTO `{$tableName}` (" . implode(',', $fields) . ") VALUES (" . implode(',', $holders) . ")";
-        $this->getApp()->getLog()->save([$sql, $parameters]);
+        $sql = "INSERT INTO {$tableName} (" . implode(',', $fields) . ") VALUES (" . implode(',', $holders) . ")";
 
         $stmt = $this->prepareStmt($sql, $parameters);
         $stmt->execute();
@@ -64,4 +64,53 @@ abstract class DbServiceAbstract extends ServiceAbstract
         return $this->getId();
     }
 
+    /**
+     *  Обновляет запись в таблице
+     */
+    public function update($tableName, array $data, array $conditions)
+    {
+        $fields = [];
+        $parameters = [];
+
+        $i = 1;
+        foreach ($data as $field => $value) {
+            $fields[] = $field . " = ?";
+            $parameters[$i++] = $value;
+        }
+
+        $where = [];
+        foreach ($conditions as $condition => $value) {
+            if (strpos($condition, "?") === false) {$condition = $condition . " = ?";}
+            $where[] = "(" . $condition . ")";
+            $parameters[$i++] = $value;
+        }
+
+        $sql = "UPDATE {$tableName} SET " . implode(',', $fields) . " WHERE " . implode(' AND ', $where);
+
+        $stmt = $this->prepareStmt($sql, $parameters);
+        $stmt->execute();
+
+    }
+
+    /**
+     *  Удаляет запись в таблице
+     */
+    public function delete($tableName, array $conditions)
+    {
+        $parameters = [];
+
+        $i = 1;
+        $where = [];
+        foreach ($conditions as $condition => $value) {
+            if (strpos($condition, "?") === false) {$condition = $condition . " = ?";}
+            $where[] = "(" . $condition . ")";
+            $parameters[$i++] = $value;
+        }
+
+        $sql = "DELETE FROM {$tableName} WHERE " . implode(' AND ', $where);
+
+        $stmt = $this->prepareStmt($sql, $parameters);
+        $stmt->execute();
+
+    }
 }

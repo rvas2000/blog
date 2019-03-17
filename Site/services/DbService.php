@@ -134,4 +134,25 @@ class DbService extends DbServiceAbstract
 
         return $rs;
     }
+
+    public function saveTag($data)
+    {
+        $id = null;
+        if (isset($data['id'])) {
+            $id = $data['id'];
+            unset($data['id']);
+        }
+
+        if (empty($id)) {
+            $id = $this->insert('tags', $data);
+        } else {
+            $this->update('tags', $data, ['id' => $id]);
+        }
+        return $id;
+    }
+
+    public function deleteTag($id)
+    {
+        $this->delete('tags', ['id' => $id]);
+    }
 }
