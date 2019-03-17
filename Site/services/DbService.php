@@ -89,7 +89,7 @@ class DbService extends DbServiceAbstract
             if (! isset($result[$item['guid']])) {
                 $result[$item['guid']] = [
                     'guid' => $item['guid'],
-                    'img' => $item['img'],
+                    'img' => (! empty($item['img']) ? $item['img'] : 'noimage.png'),
                     'description' => $item['description'],
                     'tags' => []
                 ];
@@ -151,8 +151,35 @@ class DbService extends DbServiceAbstract
         return $id;
     }
 
+
+    public function saveGallery($data)
+    {
+        $id = null;
+        if (isset($data['id'])) {
+            $id = $data['id'];
+            unset($data['id']);
+        }
+
+        if (empty($id)) {
+            $id = uniqid();
+            $data['id'] = $id;
+            $this->insert('gallery', $data);
+        } else {
+            $this->update('gallery', $data, ['id' => $id]);
+        }
+        return $id;
+    }
+
+
     public function deleteTag($id)
     {
         $this->delete('tags', ['id' => $id]);
     }
+
+    public function deleteGallery($id)
+    {
+        $this->delete('gallery_tags', ['gallery_id' => $id]);
+        $this->delete('gallery', ['id' => $id]);
+    }
+
 }

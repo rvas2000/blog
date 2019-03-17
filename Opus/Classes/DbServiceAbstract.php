@@ -24,7 +24,11 @@ abstract class DbServiceAbstract extends ServiceAbstract
      */
     public function getId()
     {
-        return $this->getPdo()->lastInsertId();
+        try {
+            return $this->getPdo()->lastInsertId();
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     protected function prepareStmt($sql, &$parameters)

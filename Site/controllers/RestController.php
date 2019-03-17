@@ -90,9 +90,6 @@ class RestController extends Controller
         } catch (Exception $e) {
             return ['result' => 0, 'error' => $e->getMessage()];
         }
-
-
-
     }
 
 
@@ -109,6 +106,44 @@ class RestController extends Controller
         }
 
     }
+
+
+    public function actionSaveGallery()
+    {
+        try {
+            $id = $this->getRequest()->getParameter('id');
+            $description = $this->getRequest()->getParameter('description');
+            $img = $this->getRequest()->getParameter('img');
+
+            $data = [];
+            if ($id !== null) $data['id'] = $id;
+            if ($description !== null) $data['description'] = $description;
+            if ($img !== null) $data['img'] = $img;
+
+            if (count($data)) {
+                $id = $this->getService('db')->saveGallery($data);
+            }
+            return ['result' => 1, 'data' => $id];
+        } catch (Exception $e) {
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+    }
+
+
+    public function actionDeleteGallery()
+    {
+        try {
+            $id = $this->getRequest()->getParameter('id');
+            if ( ! empty($id)) {
+                $this->getService('db')->deleteGallery($id);
+            }
+            return ['result' => 1, 'data' => $id];
+        } catch (Exception $e) {
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+
+    }
+
 
     public function actionTest()
     {

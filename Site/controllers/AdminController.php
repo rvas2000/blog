@@ -44,4 +44,11 @@ class AdminController extends Controller
         return $this->renderPartial('_all-gallery', ['items' => $items]);
 
     }
+
+
+    public function actionGetEmptyGalleryAjax()
+    {
+        return $this->renderPartial('_gallery', ['item' => ['guid' => '', 'img' => 'noimage.png', 'description' => '']]);
+    }
+
 }
