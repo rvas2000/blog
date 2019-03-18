@@ -69,7 +69,7 @@ class RestController extends Controller
             $tag = $this->getRequest()->getParameter('tag');
 
             $rows = $this->getService('db')->getTags($tag);
-            return ['result' => 1, 'data' => $rows];
+            return ['result' => 1, 'data' => array_map(function ($v) {$v['name'] = htmlspecialchars($v['name']); return $v;}, $rows)];
         } catch (Exception $e) {
             // return $e->getMessage();
             return ['result' => 0, 'error' => $e->getMessage()];
@@ -107,6 +107,38 @@ class RestController extends Controller
 
     }
 
+
+    public function actionDeleteGalleryTags()
+    {
+        try {
+            $tagsId = $this->getRequest()->getParameter('tags_id');
+            $galleryId = $this->getRequest()->getParameter('gallery_id');
+            if ( ! (empty($tagsId) || empty($galleryId) )) {
+                $this->getService('db')->deleteGalleryTags($galleryId, $tagsId);
+            }
+            return ['result' => 1];
+        } catch (Exception $e) {
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+
+    }
+
+
+
+    public function actionAddGalleryTags()
+    {
+        try {
+            $tagsId = $this->getRequest()->getParameter('tags_id');
+            $galleryId = $this->getRequest()->getParameter('gallery_id');
+            if ( ! (empty($tagsId) || empty($galleryId) )) {
+                $this->getService('db')->addGalleryTags($galleryId, $tagsId);
+            }
+            return ['result' => 1];
+        } catch (Exception $e) {
+            return ['result' => 0, 'error' => $e->getMessage()];
+        }
+
+    }
 
     public function actionSaveGallery()
     {

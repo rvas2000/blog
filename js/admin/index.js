@@ -180,6 +180,100 @@ $(function() {
         return false;
     });
 
+    // Обработка добавления тега
+    $(document).delegate('div.gallery-content-item-tags input[type=text]', 'input', function (evnt) {
+        var input = $(evnt.currentTarget);
+        var container = input.parent().parent();
+        var selectContainer = container.find('div.select-container');
+        selectContainer.empty();
+        var tag = input.val();
+        if (tag.length > 2) {
+            $.ajax({
+                url: "?controller=rest&action=get-tags",
+                type: 'post',
+                data: {"tag": tag},
+                dataType: 'json',
+                success: function (data){
+
+                    if (data.data.length > 0) {
+
+                        var sel = '<select>' + $.map(data.data, function (v) {
+                            return '<option value="' +   v['id'] + '|' + v['name'] + '">' + v['name'] + '</option>';
+                        }).join('') + '<select>';
+                        selectContainer.append(sel);
+                    }
+                }
+            });
+        }
+
+        return true;
+    })
+
+    // Обработка выбора тега из выпдающего списка
+    $(document).delegate('div.gallery-content-item-tags div.select-container select', 'click', function (evnt) {
+        var sel = $(evnt.currentTarget);
+        var container = sel.parent().parent();
+        var item = sel.val().split('|');
+
+        // sel.remove();
+
+        var tagsId = item[0];
+        var name = item[1];
+        var galleryId = container.parent().data('id');
+        container.append('<div class="tag-item" data-id="' + tagsId + '">' + name + '<a href="#" title="Удалить">X</a></div>');
+
+
+        $.ajax({
+            url: "?controller=rest&action=add-gallery-tags",
+            type: 'post',
+            data: {"gallery_id": galleryId, "tags_id": tagsId},
+            dataType: 'json',
+            success: function (data){
+            }
+        });
+
+        return false;
+    });
+
+
+    $(document).delegate('div.gallery-content-item-tags div.select-container select', 'focusout', function (evnt) {
+        var sel = $(evnt.currentTarget);
+        var container = sel.parent().parent();
+        container.find('input').val('');
+        sel.remove();
+        return false;
+    });
+
+
+
+    // Обработка удаления тега из описания картинки
+    $(document).delegate('div.gallery-content-item-tags div.tag-item a', 'click', function (evnt) {
+        var a = $(evnt.currentTarget);
+        var element = a.parent();
+
+        var tagsId = element.data('id');
+        var galleryId = element.parent().parent().data('id');
+
+        var data = {
+            "gallery_id": galleryId,
+            "tags_id": tagsId
+        };
+
+        $.ajax({
+            url: "?controller=rest&action=delete-gallery-tags",
+            type: 'post',
+            data: data,
+            dataType: 'json',
+            success: function (data){
+                if (data.result == 1) {
+                    element.remove();
+                }
+            }
+        });
+
+        return true;
+    })
+
     // Начальная загрузка списка тегов и галереи
     $('div.tag-filter form').trigger('submit');
 

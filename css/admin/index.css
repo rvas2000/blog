@@ -5,6 +5,11 @@ div.admin-gallery, div.admin-tags {
     min-width: 335px;
 }
 
+div.admin-gallery a, div.admin-tags a {
+    font-size: 14px;
+    margin: 5px;
+}
+
 div.admin-gallery h3, div.admin-tags h3 {
     margin: 0 10px 10px 10px;
 }
@@ -51,10 +56,54 @@ div.gallery-content-item input[type=text]{
 }
 
 div.gallery-content-item-image {
-    width: 60%;
+    width: 50%;
     border: 1px solid #c1c1c1;
 }
 
 div.gallery-content-item-image img {
+    width: 100%;
+}
+
+div.gallery-content-item-tags {
+    width: calc(50% - 50px);
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+div.gallery-content-item-tags a {
+    font-size: 12px;
+}
+
+div.gallery-content-item-tags div.tag-item {
+    border: 1px solid #c1c1c1;
+    width: auto;
+    font-size: 12px;
+    padding: 2px 4px;
+    height: 16px;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+div.gallery-content-item-tags div.tag-item a {
+    font-weight: bolder;
+    color: red;
+}
+
+
+div.gallery-content-item-tags label {
+    font-size: 12px;
+}
+
+div.gallery-content-item-tags div.select-container {
+    padding: 0;
+    margin: 1px 0 0 0;
+    width: auto;
+    /*height: 17px;*/
+    width: 100%;
+}
+
+div.gallery-content-item-tags div.select-container select {
     width: 100%;
 }

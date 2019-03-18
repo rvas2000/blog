@@ -176,6 +176,17 @@ class DbService extends DbServiceAbstract
         $this->delete('tags', ['id' => $id]);
     }
 
+    public function addGalleryTags($galleryId, $tagsId)
+    {
+        $this->insert('gallery_tags', ['gallery_id' => $galleryId, 'tags_id' => $tagsId]);
+    }
+
+
+    public function deleteGalleryTags($galleryId, $tagsId)
+    {
+        $this->delete('gallery_tags', ['gallery_id' => $galleryId, 'tags_id' => $tagsId]);
+    }
+
     public function deleteGallery($id)
     {
         $this->delete('gallery_tags', ['gallery_id' => $id]);
