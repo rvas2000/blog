@@ -4,7 +4,7 @@
 <div class="news gray-border" data-new-id="<?php echo $item['id']; ?>">
     <div class="news-left">
         <div class="news-preview">
-            <img src="/images/gallery/<?php echo $item['preview']; ?>"/>
+            <img src="images/gallery/<?php echo $item['preview']; ?>"/>
         </div>
         <div class="news-date"><?php echo $createdAt->format('d.m.Y H:i');?></div>
     </div>

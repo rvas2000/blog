@@ -20,7 +20,7 @@ $(function () {
         };
 
         $.ajax({
-            url: '/?action=get-news-ajax',
+            url: '?action=get-news-ajax',
             methos: 'post',
             data: parameters,
             success: function (data) {

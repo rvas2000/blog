@@ -1,9 +1,9 @@
 <html>
     <head>
-        <link rel="stylesheet" href="/css/main.css"/>
+        <link rel="stylesheet" href="css/main.css"/>
         <?php echo $this->renderCss();?>
-        <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="/js/main.js"></script>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
         <?php echo $this->renderJs();?>
     </head>
     <body>
@@ -14,19 +14,19 @@
         <div class="menu">
             <?php if (! $this->getApp()->getAuth()->isAuthorized()):?>
                 <div class="auth-form">
-                    <form method="post" action="/?controller=auth&action=login">
+                    <form method="post" action="?controller=auth&action=login">
                         <label>Авторизация<input type="password" name="password" placeholder="Введите пароль"/></label>
                         <input type="submit" value="Ok"/>
                     </form>
                 </div>
             <?php else: ?>
                 <ul>
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="?controller=admin">Админка</a></li>
-                    <li><a href="?controller=test">Тест</a></li>
+                    <li><a href="./">Главная</a></li>
+                    <li><a href="./?controller=admin">Админка</a></li>
+                    <li><a href="./?controller=test">Тест</a></li>
                 </ul>
                 <div class="auth-form">
-                    <a href="/?controller=auth&action=logout">Выйти</a>
+                    <a href="?controller=auth&action=logout">Выйти</a>
                 </div>
             <?php endif; ?>
         </div>

@@ -15,8 +15,8 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $this->getView()->registerCss('/css/default/index.css');
-        $this->getView()->registerJs('/js/default/index.js');
+        $this->getView()->registerCss('css/default/index.css');
+        $this->getView()->registerJs('js/default/index.js');
         return $this->render();
     }
 

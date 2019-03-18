@@ -26,7 +26,7 @@ $(function() {
 
         if (value != '') {
             $.ajax({
-                url: '/?controller=rest&action=save-tag',
+                url: '?controller=rest&action=save-tag',
                 method: 'post',
                 data: {
                     "id": id,
@@ -46,7 +46,7 @@ $(function() {
 
         if (id != '') {
             $.ajax({
-                url: '/?controller=rest&action=delete-tag',
+                url: '?controller=rest&action=delete-tag',
                 method: 'post',
                 data: {
                     "id": id,
@@ -65,7 +65,7 @@ $(function() {
     // Обработка добавления тега
     $(document).delegate('a.add-tag', 'click', function (evnt) {
         $.ajax({
-            url: '/?controller=admin&action=get-empty-tag-ajax',
+            url: '?controller=admin&action=get-empty-tag-ajax',
             success: function (data) {
                 $('div.tags-content').prepend(data);
             }
@@ -83,7 +83,7 @@ $(function() {
 
         if (value != '') {
             $.ajax({
-                url: '/?controller=rest&action=save-gallery',
+                url: '?controller=rest&action=save-gallery',
                 method: 'post',
                 dateType: 'ajax',
                 data: {
@@ -102,7 +102,7 @@ $(function() {
     // Обработка добавления элемента галереи
     $(document).delegate('a.add-gallery', 'click', function (evnt) {
         $.ajax({
-            url: '/?controller=admin&action=get-empty-gallery-ajax',
+            url: '?controller=admin&action=get-empty-gallery-ajax',
             success: function (data) {
                 $('div.gallery-content').prepend(data);
             }
@@ -119,7 +119,7 @@ $(function() {
 
         if (id != '') {
             $.ajax({
-                url: '/?controller=rest&action=delete-gallery',
+                url: '?controller=rest&action=delete-gallery',
                 method: 'post',
                 data: {
                     "id": id,

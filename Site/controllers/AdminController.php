@@ -17,8 +17,8 @@ class AdminController extends Controller
             $this->getApp()->getResponse()->redirect('/');
             return;
         }
-        $this->getView()->registerCss('/css/admin/index.css');
-        $this->getView()->registerJs('/js/admin/index.js');
+        $this->getView()->registerCss('css/admin/index.css');
+        $this->getView()->registerJs('js/admin/index.js');
         return $this->render();
     }
 
