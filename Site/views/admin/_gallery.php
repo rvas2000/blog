@@ -3,5 +3,6 @@
         <img src="images/gallery/<?php echo $item['img'];?>"/>
     </div>
     <span><a href="#" class="gallery-delete">Удалить</a></span>
-    <input type="text" value="<?php echo $item['description'];?>" placeholder="Описание картинки"/>
+    <input type="text" name="description" value="<?php echo $item['description'];?>" placeholder="Описание картинки"/>
+    <input type="hidden" name="img"/>
 </div>

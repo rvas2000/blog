@@ -10,13 +10,13 @@ class AuthController extends Controller
         if ( ! empty($password)) {
             $this->getApp()->getAuth()->login($password);
         }
-        $this->getApp()->getResponse()->redirect('/blog');
+        $this->getApp()->getResponse()->redirect('./');
     }
 
     public function actionLogout()
     {
         $this->getApp()->getAuth()->logout();
-        $this->getApp()->getResponse()->redirect('/blog');
+        $this->getApp()->getResponse()->redirect('./');
     }
 
 }

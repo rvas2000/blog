@@ -37,6 +37,7 @@ $(function() {
             });
 
         }
+        return false;
     });
 
     // Обработка удаления тега
@@ -74,28 +75,39 @@ $(function() {
         return false;
     });
 
-
-    // Обработка редактрования элемента галереи
-    $(document).delegate('div.gallery-content-item input[type=text]', 'change', function (evnt) {
-        var input = $(evnt.currentTarget);
+    // Функция редактирования элемента галереи
+    // input - элемент ввода, значение которого необходимо записать в БД
+    function editGallery(input)
+    {
+        var input = $(input);
+        var name = input.attr('name');
         var value = input.val();
         var id = input.parent().data('id');
+
+
+        var data = {};
+        data["id"] = id;
+        data[name] = value;
 
         if (value != '') {
             $.ajax({
                 url: '?controller=rest&action=save-gallery',
                 method: 'post',
                 dateType: 'ajax',
-                data: {
-                    "id": id,
-                    "description": value
-                },
+                data: data,
                 success: function (data) {
                     input.parent().data('id', data.data);
                 }
             });
 
         }
+    }
+
+
+    // Обработка редактрования элемента галереи
+    $(document).delegate('div.gallery-content-item input[type=text]', 'change', function (evnt) {
+        editGallery(evnt.currentTarget);
+        return false;
     });
 
 
@@ -132,6 +144,39 @@ $(function() {
         } else {
             a.parent().parent().remove();
         }
+        return false;
+    });
+
+
+    var currentImgObject = null;
+    var uploadForm = $('form.file-upload-form')[0];
+
+    // Загрузка картинки
+    $(document).delegate('div.gallery-content-item-image', 'click', function (evnt) {
+        currentImgObject = evnt.currentTarget;
+        uploadForm.reset();
+        $(uploadForm.fff).trigger('click');
+        return false;
+    });
+
+    $(document).delegate(uploadForm.fff, 'change', function(evnt) {
+
+        var formData = new FormData(uploadForm);
+        $.ajax({
+            url: "?controller=rest&action=upload",
+            type: 'post',
+            dataType: 'json',
+            contentType: false, // важно - убираем форматирование данных по умолчанию
+            processData: false, // важно - убираем преобразование строк по умолчанию
+            data: formData,
+            success: function (data){
+                var fileName = data.data;
+                $(currentImgObject).find('img').attr('src', 'images/gallery/' + fileName);
+                var input = $(currentImgObject).parent().find('input[name=img]').val(fileName);
+                editGallery(input);
+            }
+
+        });
         return false;
     });
 
