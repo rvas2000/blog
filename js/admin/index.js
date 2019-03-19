@@ -180,6 +180,36 @@ $(function() {
         return false;
     });
 
+    // // Обработка добавления тега
+    // $(document).delegate('div.gallery-content-item-tags input[type=text]', 'input', function (evnt) {
+    //     var input = $(evnt.currentTarget);
+    //     var container = input.parent().parent();
+    //     var selectContainer = container.find('div.select-container');
+    //     selectContainer.empty();
+    //     var tag = input.val();
+    //     if (tag.length > 2) {
+    //         $.ajax({
+    //             url: "?controller=rest&action=get-tags",
+    //             type: 'post',
+    //             data: {"tag": tag},
+    //             dataType: 'json',
+    //             success: function (data){
+    //
+    //                 if (data.data.length > 0) {
+    //
+    //                     var sel = '<select>' + $.map(data.data, function (v) {
+    //                         return '<option value="' +   v['id'] + '|' + v['name'] + '">' + v['name'] + '</option>';
+    //                     }).join('') + '<select>';
+    //                     selectContainer.append(sel);
+    //                 }
+    //             }
+    //         });
+    //     }
+    //
+    //     return true;
+    // })
+    //
+
     // Обработка добавления тега
     $(document).delegate('div.gallery-content-item-tags input[type=text]', 'input', function (evnt) {
         var input = $(evnt.currentTarget);
@@ -197,9 +227,10 @@ $(function() {
 
                     if (data.data.length > 0) {
 
-                        var sel = '<select>' + $.map(data.data, function (v) {
-                            return '<option value="' +   v['id'] + '|' + v['name'] + '">' + v['name'] + '</option>';
-                        }).join('') + '<select>';
+                        var sel = '<ul>' + $.map(data.data, function (v) {
+                            // return '<li><a href="#" data-value="' +   v['id'] + '|' + v['name'] + '">' + v['name'] + '</a></li>';
+                            return '<li data-value="' +   v['id'] + '|' + v['name'] + '">' + v['name'] + '</li>';
+                        }).join('') + '</ul>';
                         selectContainer.append(sel);
                     }
                 }
@@ -209,13 +240,15 @@ $(function() {
         return true;
     })
 
-    // Обработка выбора тега из выпдающего списка
-    $(document).delegate('div.gallery-content-item-tags div.select-container select', 'click', function (evnt) {
-        var sel = $(evnt.currentTarget);
-        var container = sel.parent().parent();
-        var item = sel.val().split('|');
 
-        // sel.remove();
+    // Обработка выбора тега из выпдающего списка
+    $(document).delegate('div.gallery-content-item-tags div.select-container ul li', 'click', function (evnt) {
+        var sel = $(evnt.currentTarget);
+        var item = sel.data('value').split('|');
+        var container = sel.parent().parent().parent();
+
+        sel.parent().parent().empty();
+        container.parent().find('input[type=text]').val('');
 
         var tagsId = item[0];
         var name = item[1];
@@ -234,17 +267,6 @@ $(function() {
 
         return false;
     });
-
-
-    $(document).delegate('div.gallery-content-item-tags div.select-container select', 'focusout', function (evnt) {
-        var sel = $(evnt.currentTarget);
-        var container = sel.parent().parent();
-        container.find('input').val('');
-        sel.remove();
-        return false;
-    });
-
-
 
     // Обработка удаления тега из описания картинки
     $(document).delegate('div.gallery-content-item-tags div.tag-item a', 'click', function (evnt) {

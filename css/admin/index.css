@@ -107,3 +107,23 @@ div.gallery-content-item-tags div.select-container {
 div.gallery-content-item-tags div.select-container select {
     width: 100%;
 }
+
+div.gallery-content-item-tags div.select-container ul {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 3px;
+    width: calc(100% - 10px);;
+    border: 1px solid #c1c1c1;
+    font-size: 12px;
+    list-style-type: none;
+}
+
+div.gallery-content-item-tags div.select-container ul li {
+    height: 18px;
+}
+
+div.gallery-content-item-tags div.select-container ul li:hover {
+    background-color: #4a76a8;
+    color: white;
+}
